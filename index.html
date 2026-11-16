@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3ef">
+  <meta name="description" content="Crie sua conta e comece uma nova jornada com a Lumina.">
+  <title>Crie sua conta | Lumina</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #242323;
+      background: #f6f3ef;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+    }
+
+    button, input { font: inherit; }
+
+    .page {
+      width: min(1120px, 100%);
+      min-height: 700px;
+      display: grid;
+      grid-template-columns: 1fr 0.94fr;
+      overflow: hidden;
+      border: 1px solid rgba(47, 42, 38, 0.08);
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 30px 90px rgba(58, 46, 37, 0.12);
+    }
+
+    .form-side {
+      display: flex;
+      flex-direction: column;
+      padding: 42px clamp(32px, 6vw, 76px) 30px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      color: inherit;
+      font-size: 19px;
+      font-weight: 750;
+      letter-spacing: -0.7px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 11px;
+      background: #6554d9;
+      color: #fff;
+    }
+
+    .brand-mark svg { width: 19px; height: 19px; }
+
+    .form-content {
+      width: min(100%, 390px);
+      margin: auto;
+      padding: 46px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #7466d9;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1.8px;
+      line-height: 1.14;
+    }
+
+    .intro {
+      margin: 12px 0 28px;
+      color: #77736f;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .fields { display: grid; gap: 17px; }
+
+    .field { display: grid; gap: 8px; }
+
+    label {
+      color: #393735;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border: 1px solid #e8e5e2;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: #242323;
+      font-size: 14px;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    input::placeholder { color: #aaa6a2; }
+
+    input:focus {
+      border-color: #7869e1;
+      box-shadow: 0 0 0 3px rgba(120, 105, 225, 0.13);
+    }
+
+    .password-wrap { position: relative; }
+
+    .password-wrap input { padding-right: 52px; }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: #85807b;
+      cursor: pointer;
+    }
+
+    .password-toggle:hover { background: #f5f3f1; }
+    .password-toggle:focus-visible { outline: 2px solid #7869e1; }
+    .password-toggle svg { width: 18px; height: 18px; }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      color: #77736f;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .terms input {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+      margin: 1px 0 0;
+      accent-color: #6554d9;
+    }
+
+    .terms label { color: inherit; font-size: inherit; font-weight: 450; }
+    .terms a, .login a { color: #6554d9; font-weight: 650; text-decoration: none; }
+    .terms a:hover, .login a:hover { text-decoration: underline; }
+
+    .submit {
+      width: 100%;
+      height: 50px;
+      margin-top: 22px;
+      border: 0;
+      border-radius: 10px;
+      background: #6554d9;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(101, 84, 217, 0.2);
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+
+    .submit:hover {
+      transform: translateY(-1px);
+      background: #5746ca;
+      box-shadow: 0 11px 22px rgba(101, 84, 217, 0.25);
+    }
+
+    .submit:focus-visible { outline: 3px solid #b9b0ff; outline-offset: 3px; }
+
+    .form-message {
+      min-height: 20px;
+      margin: 10px 0 0;
+      color: #6554d9;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .login {
+      margin: 18px 0 0;
+      color: #77736f;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .footer {
+      margin: 0;
+      color: #aaa6a2;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .visual-side {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      overflow: hidden;
+      padding: 52px;
+      background:
+        radial-gradient(ellipse at 78% 20%, rgba(255, 220, 179, 0.84), transparent 35%),
+        radial-gradient(ellipse at 16% 85%, rgba(159, 146, 242, 0.72), transparent 42%),
+        linear-gradient(145deg, #f3d9ce 0%, #e6d9f6 54%, #c9c4fa 100%);
+    }
+
+    .visual-side::before,
+    .visual-side::after {
+      position: absolute;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .visual-side::before {
+      top: 16%;
+      right: -24%;
+      width: 520px;
+      height: 520px;
+    }
+
+    .visual-side::after {
+      right: -15%;
+      bottom: -34%;
+      width: 520px;
+      height: 520px;
+    }
+
+    .visual-copy, .artwork, .visual-note { position: relative; z-index: 1; }
+
+    .visual-copy { max-width: 390px; }
+
+    .visual-copy .eyebrow {
+      color: #5f4fc7;
+      letter-spacing: 1.8px;
+    }
+
+    .visual-copy h2 {
+      margin: 0;
+      color: #292431;
+      font-size: clamp(30px, 4vw, 45px);
+      font-weight: 650;
+      letter-spacing: -2px;
+      line-height: 1.12;
+    }
+
+    .visual-copy p:last-child {
+      max-width: 330px;
+      margin: 15px 0 0;
+      color: #615a68;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .artwork {
+      display: grid;
+      min-height: 280px;
+      place-items: center;
+    }
+
+    .artwork svg {
+      width: min(100%, 360px);
+      overflow: visible;
+      filter: drop-shadow(0 26px 30px rgba(79, 63, 135, 0.16));
+    }
+
+    .visual-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #514a5a;
+      font-size: 12px;
+    }
+
+    .avatar-stack { display: flex; padding-left: 4px; }
+
+    .avatar {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      margin-left: -4px;
+      place-items: center;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .avatar:nth-child(1) { background: #d98b72; }
+    .avatar:nth-child(2) { background: #7d70c8; }
+    .avatar:nth-child(3) { background: #5d8a78; }
+
+    .visual-note strong { color: #302a38; }
+
+    @media (max-width: 820px) {
+      body { padding: 18px; }
+      .page { grid-template-columns: 1fr; max-width: 540px; min-height: auto; }
+      .form-side { min-height: 690px; padding: 30px clamp(24px, 8vw, 48px) 24px; }
+      .form-content { padding: 42px 0; }
+      .visual-side { display: none; }
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 0; background: #fff; }
+      .page { min-height: 100vh; border: 0; border-radius: 0; box-shadow: none; }
+      .form-side { min-height: 100vh; padding: 24px 22px 18px; }
+      .form-content { padding: 36px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="form-side" aria-labelledby="signup-title">
+      <a class="brand" href="#" aria-label="Lumina, início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.8 14.7 9.3 21.2 12l-6.5 2.7L12 21.2l-2.7-6.5L2.8 12l6.5-2.7L12 2.8Z" fill="currentColor"/>
+            <circle cx="18.5" cy="5.5" r="1.5" fill="#D9D3FF"/>
+          </svg>
+        </span>
+        lumina
+      </a>
+
+      <div class="form-content">
+        <p class="eyebrow">Seu próximo capítulo começa aqui</p>
+        <h1 id="signup-title">Crie sua conta</h1>
+        <p class="intro">Tenha tudo o que você precisa em um só lugar. É simples, rápido e gratuito.</p>
+
+        <form id="signup-form">
+          <div class="fields">
+            <div class="field">
+              <label for="name">Nome completo</label>
+              <input id="name" name="name" type="text" placeholder="Como podemos te chamar?" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="password">Crie uma senha</label>
+              <div class="password-wrap">
+                <input id="password" name="password" type="password" placeholder="Mínimo de 8 caracteres" autocomplete="new-password" minlength="8" required>
+                <button class="password-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false" aria-controls="password">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z"/>
+                    <circle cx="12" cy="12" r="2.7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="terms">
+            <input id="terms" name="terms" type="checkbox" required>
+            <label for="terms">Concordo com os <a href="#termos">Termos de Uso</a> e a <a href="#privacidade">Política de Privacidade</a>.</label>
+          </div>
+
+          <button class="submit" type="submit">Criar minha conta <span aria-hidden="true">→</span></button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          <p class="login">Já tem uma conta? <a href="#entrar">Faça login</a></p>
+        </form>
+      </div>
+
+      <p class="footer">© 2025 Lumina. Feito para novas possibilidades.</p>
+    </section>
+
+    <aside class="visual-side" aria-label="Conheça a Lumina">
+      <div class="visual-copy">
+        <p class="eyebrow">Ideias que ganham vida</p>
+        <h2>Um espaço todo seu para ir mais longe.</h2>
+        <p>Organize suas ideias, acompanhe seus projetos e descubra o prazer de fazer acontecer.</p>
+      </div>
+
+      <div class="artwork" aria-hidden="true">
+        <svg viewBox="0 0 360 310" fill="none">
+          <ellipse cx="181" cy="270" rx="137" ry="17" fill="#7163B8" fill-opacity=".16"/>
+          <path d="M68 87c0-15 12-27 27-27h171c15 0 27 12 27 27v134c0 15-12 27-27 27H95c-15 0-27-12-27-27V87Z" fill="#fff" fill-opacity=".83"/>
+          <path d="M68 96h225v125c0 15-12 27-27 27H95c-15 0-27-12-27-27V96Z" fill="#FBFAFF"/>
+          <path d="M68 87c0-15 12-27 27-27h171c15 0 27 12 27 27v9H68v-9Z" fill="#EAE6FA"/>
+          <circle cx="88" cy="82" r="4" fill="#E6938C"/>
+          <circle cx="102" cy="82" r="4" fill="#E9C16E"/>
+          <circle cx="116" cy="82" r="4" fill="#81B99B"/>
+          <rect x="91" y="115" width="93" height="9" rx="4.5" fill="#D9D3F2"/>
+          <rect x="91" y="133" width="148" height="6" rx="3" fill="#E8E5EF"/>
+          <rect x="91" y="146" width="121" height="6" rx="3" fill="#E8E5EF"/>
+          <rect x="91" y="173" width="79" height="31" rx="9" fill="#7061D5"/>
+          <path d="m122 188 5 5 11-12" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M236 133c0-18 15-33 33-33h17v106h-17c-18 0-33-15-33-33v-40Z" fill="#F0B49E"/>
+          <path d="M253 151c0-11 9-20 20-20h13v55h-13c-11 0-20-9-20-20v-15Z" fill="#E79680"/>
+          <path d="M240 215c3-22 16-34 34-34s31 12 34 34l4 14h-77l5-14Z" fill="#7768D8"/>
+          <path d="m246 229 9-30 20 9 19-9 10 30h-58Z" fill="#887AE8"/>
+          <path d="M276 199v30" stroke="#D8D2FF" stroke-width="2"/>
+          <circle cx="268" cy="151" r="2" fill="#544D59"/>
+          <path d="M264 163c4 4 9 4 13 0" stroke="#B36F66" stroke-width="2" stroke-linecap="round"/>
+          <path d="M265 129c3-8 9-12 18-10 5 1 8 4 10 8" stroke="#654C54" stroke-width="7" stroke-linecap="round"/>
+          <path d="M52 155h9M299 119h10M195 42v10M313 183h9" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          <path d="m315 71 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#fff" fill-opacity=".9"/>
+          <path d="m51 215 2.5 5.5L59 223l-5.5 2.5L51 231l-2.5-5.5L43 223l5.5-2.5L51 215Z" fill="#fff" fill-opacity=".9"/>
+        </svg>
+      </div>
+
+      <div class="visual-note">
+        <div class="avatar-stack" aria-hidden="true">
+          <span class="avatar">MA</span>
+          <span class="avatar">JL</span>
+          <span class="avatar">CA</span>
+        </div>
+        <span><strong>Novos começos</strong> ficam melhores juntos.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const passwordInput = document.querySelector("#password");
+    const passwordToggle = document.querySelector(".password-toggle");
+    const signupForm = document.querySelector("#signup-form");
+    const formMessage = document.querySelector("#form-message");
+
+    passwordToggle.addEventListener("click", () => {
+      const shouldShow = passwordInput.type === "password";
+      passwordInput.type = shouldShow ? "text" : "password";
+      passwordToggle.setAttribute("aria-pressed", String(shouldShow));
+      passwordToggle.setAttribute("aria-label", shouldShow ? "Ocultar senha" : "Mostrar senha");
+    });
+
+    signupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formMessage.textContent = "Cadastro demonstrativo: conecte este formulário ao seu serviço para criar a conta.";
+    });
+  </script>
+</body>
+</html>
